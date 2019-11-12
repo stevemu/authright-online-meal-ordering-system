@@ -1,8 +1,8 @@
 function getMenu() {
   let menu = [
-    {id: 1, name: "L1"},
-    {id: 2, name: "L2"},
-    {id: 3, name: "L3"},
+    {itemId: "L1", name: "Fish", price: 11},
+    {itemId: "L2", name: "Egg", price: 11},
+    {itemId: "L3", name: "Eggpalnt", price: 11}
   ]
   return menu;
 }
