@@ -1,14 +1,13 @@
 {
-  "name": "authright-online-meal-ordering",
+  "name": "authright-meal",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "server": "nodemon server"
   },
   "apps": [
     {
-      "name": "authright-online-meal-ordering",
+      "name": "authright-meal",
       "script": "node",
       "args": "server"
     }
