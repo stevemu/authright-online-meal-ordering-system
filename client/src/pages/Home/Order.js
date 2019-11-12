@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Button } from 'react-bootstrap';
+
 // presentational
 export default class Order extends React.Component {
   
@@ -9,12 +11,11 @@ export default class Order extends React.Component {
 
     orderItems.forEach((element, index) => {
       items.push(
-
-        <p key={element.itemId}>
-          <li>{element.name}</li>
-          <li>{element.quantity}</li>
-          <li>{element.price}</li>
-        </p>
+        <div key={element.itemId}>
+          <p>
+            {element.name} {' '} {element.quantity} {' '} {'$'}{element.price}
+          </p>
+        </div>
       );
     });
 
