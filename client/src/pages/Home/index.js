@@ -2,12 +2,16 @@ import React from "react";
 import Menu from "./Menu";
 import Order from "./Order";
 
-// container
+const container = {
+  height: '100vh',
+  fontFamily: 'Open Sans',
+}
+
 class Home extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={container}>
         <Menu />
         <Order />
       </div>
