@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, DropdownButton, Dropdown } from "react-bootstrap";
+import { DropdownType, DropdownButton, Dropdown } from "react-bootstrap";
 
 // presentational
 export default class Order extends React.Component {
@@ -12,11 +12,18 @@ export default class Order extends React.Component {
       items.push(
         <div key={element.itemId}>
           <p>
-            <DropdownButton id="dropdown-basic-button" title="">
-              <Dropdown.Item href="#/1">1</Dropdown.Item>
-              <Dropdown.Item href="#/2">2</Dropdown.Item>
-              <Dropdown.Item href="#/...">...</Dropdown.Item>
-            </DropdownButton>{element.name} {element.quantity} {"$"}{element.price}
+            <DropdownType
+              size="lg"
+              title="Drop small"
+              id={`dropdown-button-drop-${idx}`}
+              key={idx}
+            >
+              <Dropdown.Item eventKey="1">Action</Dropdown.Item>
+              <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
+              <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+            </DropdownType>{element.name} {element.quantity} {"$"}{element.price}
           </p>
         </div>
       );
