@@ -1,5 +1,6 @@
 import React from 'react';
 
+// presentational
 export default class Menu extends React.Component {
 
   render() {
