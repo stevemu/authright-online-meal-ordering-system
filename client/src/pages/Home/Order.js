@@ -4,8 +4,6 @@ import { DropdownButton, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from "../../components/GenerateDropdownItem";
 import { getMenu, postOrder } from "../../utils";
 
-
-// presentational
 export default class Order extends React.Component {
   constructor(props) {
     super(props);
