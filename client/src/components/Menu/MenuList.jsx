@@ -96,7 +96,7 @@ class MenuList extends Component {
                 <Table style={styles.table} responsive>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>ID</th>
                             <th>Lunch Special</th>
                             <th> </th>
                         </tr>
@@ -107,7 +107,7 @@ class MenuList extends Component {
                                 data-price={item.price}
                                 data-item={item.name}
                                 onClick={(event) => { this.setModalShow(true); this.fetchDetails(event); }}>
-                                <td>{item.id}</td>
+                                <td>{item.itemId}</td>
                                 <td>{item.name}</td>
                                 <td>{item.price}</td>
                             </tr>
