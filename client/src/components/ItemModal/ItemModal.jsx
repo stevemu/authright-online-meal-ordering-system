@@ -25,28 +25,18 @@ class ItemModal extends Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Container>
-                        <Row className="show-grid">
-                            <Col xs={4} md={4}>
-                                <p>Quantity</p>
-                            </Col>
-                            <Col xs={4} md={4}>
-                                <Button onClick={this.props.minushandler}>-</Button>
-                            </Col>
-                            <Col xs={4} md={4}>
-                                <p>{this.props.quantity}</p>
-                            </Col>
-                            <Col xs={4} md={4}>
-                                <Button onClick={this.props.addhandler}>+</Button>
-                            </Col>
-                        </Row>
-                    </Container>
+                    <Row>
+                        <p>Quantity</p>
+                        <Button onClick={this.props.minushandler}>-</Button>
+                        <p>{this.props.quantity}</p>
+                        <Button onClick={this.props.addhandler}>+</Button>
+                    </Row>
                 </Modal.Body>
                 <Modal.Footer>
                     <p>Item total: ${itemTotalPrice}</p>
                     <Button onClick={this.props.updateorder}>{this.props.command}</Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal >
         );
     }
 }
