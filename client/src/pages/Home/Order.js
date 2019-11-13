@@ -7,9 +7,6 @@ import GenerateDropdownItem from '../../components/GenerateDropdownItem';
 export default class Order extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      subtotal: 0
-    }
   
     this.handleSelectQuantityChange = this.handleSelectQuantityChange.bind(this);
     this.getSubtotal = this.getSubtotal.bind(this);
