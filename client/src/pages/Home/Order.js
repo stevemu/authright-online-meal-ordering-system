@@ -9,7 +9,8 @@ export default class Order extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {}
+      data: {},
+      counter: 0
     }
   
     this.handleSelectQuantityChange = this.handleSelectQuantityChange.bind(this);
@@ -38,12 +39,24 @@ export default class Order extends React.Component {
     return total;
   } 
 
-  async componentDidMount() {
-    let data = await getOrder();
+  // pulling
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      2000
+    );
+  }
+
+  async tick() {
+    let apiData = await getOrder();
     this.setState({
-      data: data
+      data: apiData,
+      counter: this.state.counter+=1
     });
-    console.log(data);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
   render() {
@@ -80,6 +93,8 @@ export default class Order extends React.Component {
         <h1>Order Summary</h1>
         <h5>Subtotal {"$"}{this.getSubtotal(orderItems)}</h5>
         {items}
+
+        <h2>{this.state.counter}</h2>
       </div>
     );
   }
