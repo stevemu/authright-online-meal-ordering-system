@@ -8,6 +8,13 @@ export default class Order extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      orderItems: [
+        {
+          "_id": "5dcc1b28d9d58839739b0e1e",
+          "itemId": "L1",
+          "quantity": 100
+        }
+      ],
       menu: []
     };
 
