@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DropdownButton, Dropdown, Container, Col, Row } from "react-bootstrap";
+import { DropdownButton, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from '../../components/GenerateDropdownItem';
 import { getOrder } from '../../utils';
 
@@ -53,7 +53,7 @@ export default class Order extends React.Component {
     orderItems.forEach((element) => {
       items.push(
         <div key={element.itemId}>
-          <p style={{display: "flex"}}>  
+          <div style={{display: "flex", marginBottom: "2%"}}>  
             <Container>
               <Row>
                 <Col sm={2}>
@@ -70,12 +70,10 @@ export default class Order extends React.Component {
                 </Col>
               </Row>
             </Container>         
-          </p>
+          </div>
         </div>
       );
     });
-
-    
 
     return (
       <div>
