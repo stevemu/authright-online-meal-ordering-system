@@ -1,36 +1,19 @@
 import React, { Component } from 'react'
-import { Jumbotron, ButtonGroup, Button } from 'react-bootstrap'
-// import './style.css'
+import { Jumbotron } from 'react-bootstrap'
 
-const container = {
-    border: '1px solid lightgrey',
-    height: 'auto',
-}
-const JumbotronStyle = {
-    backgroundColor: 'white',
-    marginBottom: '0rem',
-    padding: '1.5em 2em'
-}
+import styles from './Restaurant.css.js'
+import GroupButton from '../Button/GroupButton'
 
 export default class Restaurant extends Component {
 
     render() {
 
         return (
-            <div style={container}>
-                <Jumbotron style={JumbotronStyle}>
+            <div style={styles.container}>
+                <Jumbotron style={styles.JumbotronStyle}>
                     <h1>Taipei Cuisine</h1>
                     <p>68 Billings Rd, Quincy, MA 02171</p>
-                    <div>
-                        <ButtonGroup toggle className="mt-3">
-                            <Button defaultChecked>
-                                Steve
-                            </Button>
-                            <Button>
-                                Shawn
-                            </Button>
-                        </ButtonGroup>
-                    </div>
+                    <GroupButton />
                 </Jumbotron>
             </div >
         )

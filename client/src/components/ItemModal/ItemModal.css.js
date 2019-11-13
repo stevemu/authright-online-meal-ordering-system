@@ -17,7 +17,6 @@ export default {
         display: 'inline-grid',
         padding: '0px',
         overflowY: 'auto',
-        // justifyItems: 'center',
         alignItems: 'center',
     },
     control: {

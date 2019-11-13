@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Table } from 'react-bootstrap'
+import { Table, Nav } from 'react-bootstrap'
 
+import styles from './MenuList.css.js'
 import ItemModal from '../ItemModal/ItemModal'
 
 export default class MenuList extends Component {
@@ -72,6 +73,7 @@ export default class MenuList extends Component {
         this.setState(state => ({
             ...state,
             modalShow: value,
+            quantity: 1
         }))
     }
 
@@ -109,16 +111,29 @@ export default class MenuList extends Component {
         this.setState(state => ({
             ...state,
             modalShow: value,
+            quantity: 1
         }))
     }
 
     render() {
         const { data, currentData, currentPrice } = this.state;
-        // console.log(currentData) 
 
         return (
-            <div style={{ padding: '0rem 2rem', border: '1px solid lightgrey', overflow: 'scroll' }}>
-                <Table responsive>
+            <div style={styles.container}>
+                <Nav variant="tabs" defaultActiveKey="/" fixed="top" style={styles.header}>
+                    <Nav.Item style={styles.title}>
+                        Menu
+                    </Nav.Item>
+                    <div style={styles.tag}>
+                        <Nav.Item>
+                            <Nav.Link href="/">Lunch Special</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="link-1">Chef's Specialties</Nav.Link>
+                        </Nav.Item>
+                    </div>
+                </Nav>
+                <Table style={styles.table} responsive>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -128,12 +143,10 @@ export default class MenuList extends Component {
                     </thead>
                     <tbody>
                         {data.map((item, index) => (
-                            <tr key={index} 
-                            data-price={item.price}
-                            data-item={item.name}
-                            onClick={(event) => { this.setModalShow(true); this.fetchDetails(event);}}
-                                // onClick={(e) => this.setModalShow(e,true)}
-                                >
+                            <tr key={index}
+                                data-price={item.price}
+                                data-item={item.name}
+                                onClick={(event) => { this.setModalShow(true); this.fetchDetails(event); }}>
                                 <td>{item.id}</td>
                                 <td>{item.name}</td>
                                 <td>{item.price}</td>
@@ -149,12 +162,10 @@ export default class MenuList extends Component {
                     quantity={this.state.quantity}
                     addhandler={this.addHandler}
                     minushandler={this.minusHandler}
-                    // addhandler={() => this.setQuantity(1)}
-                    // minushandler={() => this.setQuantity(-1)}
                     unitprice={this.state.unitprice}
                     command={this.state.command}
                     onHide={() => this.setModalShow(false)}
-                    updateorder={() => this.updateOrder(false)}/>
+                    updateorder={() => this.updateOrder(false)} />
             </div>
         )
     }
