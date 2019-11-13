@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DropdownButton, Dropdown } from "react-bootstrap";
+import { DropdownButton, Dropdown, Container } from "react-bootstrap";
 import GenerateDropdownItem from '../../components/GenerateDropdownItem';
 
 // presentational
@@ -41,7 +41,7 @@ export default class Order extends React.Component {
     orderItems.forEach((element) => {
       items.push(
         <div key={element.itemId}>
-          <p style={{display: "flex"}}>
+          <p style={{display: "flex"}}>           
             <DropdownButton id="dropdown-basic-button" title={element.quantity} size="sm">
               {/* <Dropdown.Item>Remove</Dropdown.Item>
               <Dropdown.Divider /> */}
