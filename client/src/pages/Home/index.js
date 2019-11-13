@@ -10,6 +10,7 @@ const container = {
 };
 
 class Home extends React.Component {
+<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {
@@ -61,6 +62,8 @@ class Home extends React.Component {
     console.log("Delete!", itemId);
   }
 
+=======
+>>>>>>> master
   render() {
     return (
       <div style={container}>
