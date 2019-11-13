@@ -43,8 +43,8 @@ export default class Order extends React.Component {
         <div key={element.itemId}>
           <p style={{display: "flex"}}>
             <DropdownButton id="dropdown-basic-button" title={element.quantity} size="sm">
-              <Dropdown.Item>Remove</Dropdown.Item>
-              <Dropdown.Divider />
+              {/* <Dropdown.Item>Remove</Dropdown.Item>
+              <Dropdown.Divider /> */}
               <GenerateDropdownItem id={element.itemId} onSelect={this.handleSelectQuantityChange} />
             </DropdownButton>
             {element.name} {"$"}{this.updateItemPrice(element.price, element.quantity)}
