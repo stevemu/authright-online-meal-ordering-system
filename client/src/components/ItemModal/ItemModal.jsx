@@ -5,6 +5,8 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Button'
 
+import styles from './ItemModal.css.js'
+
 
 class ItemModal extends Component {
     render() {
@@ -18,23 +20,24 @@ class ItemModal extends Component {
                 {...this.props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered>
+                centered
+                style={styles.modal}>
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
+                    <Modal.Title>
                         {name}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body style={styles.context}>
                     <Row>
                         <p>Quantity</p>
-                        <Button onClick={this.props.minushandler}>-</Button>
+                        <Button onClick={this.props.minushandler} disabled={this.props.quantity< 2}>-</Button>
                         <p>{this.props.quantity}</p>
                         <Button onClick={this.props.addhandler}>+</Button>
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
                     <p>Item total: ${itemTotalPrice}</p>
-                    <Button onClick={this.props.updateorder}>{this.props.command}</Button>
+                    <Button variant="primary" onClick={this.props.updateorder}>{this.props.command}</Button>
                 </Modal.Footer>
             </Modal >
         );
