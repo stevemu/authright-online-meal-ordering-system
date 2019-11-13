@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
-// import Col from 'react-bootstrap/Col'
+
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-// import Container from 'react-bootstrap/Button'
 
+import styles from './ItemModal.css.js'
 
 class ItemModal extends Component {
     render() {
@@ -18,24 +17,25 @@ class ItemModal extends Component {
                 {...this.props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered>
+                centered
+                style={styles.modal}>
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
+                    <Modal.Title>
                         {name}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <Row>
-                        <p>Quantity</p>
-                        <Button onClick={this.props.minushandler}>-</Button>
-                        <p>{this.props.quantity}</p>
-                        <Button onClick={this.props.addhandler}>+</Button>
-                    </Row>
+                <Modal.Body style={styles.context}>
+                    <div style={styles.quantity}>Quantity</div>
+                    <div style={styles.control}>
+                        <Button style={styles.controlBtn} onClick={this.props.minushandler} disabled={this.props.quantity < 2}>-</Button>
+                        <div style={styles.quantityDisplay}>{this.props.quantity}</div>
+                        <Button style={styles.controlBtn} onClick={this.props.addhandler}>+</Button>
+                    </div>
                 </Modal.Body>
-                <Modal.Footer>
-                    <p>Item total: ${itemTotalPrice}</p>
-                    <Button onClick={this.props.updateorder}>{this.props.command}</Button>
-                </Modal.Footer>
+                <Modal.Body style={styles.footer}>
+                    <div>Item total: ${itemTotalPrice}</div>
+                    <Button variant="primary" onClick={this.props.updateorder} style={styles.footerBtn}>{this.props.command}</Button>
+                </Modal.Body>
             </Modal >
         );
     }

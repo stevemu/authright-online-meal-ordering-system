@@ -16,17 +16,16 @@ export default class Menu extends Component {
       <Fragment>
         <Navigation />
         <div>
-          {/* <Container> */}
           <Row>
-            <Col xs={8} md={6}>
+            <Col xs={7}>
               <Restaurant />
               <MenuList />
             </Col>
-            <Col xs={6} md={4}>
+            <Col xs={5}>
+              <h1>Order summary</h1>
               <Order />
             </Col>
           </Row>
-          {/* </Container> */}
         </div>
       </Fragment>
     );
