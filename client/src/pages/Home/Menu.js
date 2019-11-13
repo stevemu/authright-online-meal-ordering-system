@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react'
+import MenuList from '../../components/Menu/MenuList'
+import Navigation from '../../components/Navbar/Navigation'
+import Restaurant from '../../components/Restaurant/Restaurant'
+import { Row, Col } from 'react-bootstrap'
 
-// presentational
-export default class Menu extends React.Component {
 
+export default class Menu extends Component {
   render() {
-    return <div>menu</div>
+    return (
+      <Fragment>
+        <Navigation />
+        <div>
+          {/* <Container> */}
+            <Row>
+              <Col xs={7}>
+                <Restaurant />
+                <MenuList />
+              </Col>
+              <Col xs={5}>
+                right
+            </Col>
+            </Row>
+          {/* </Container> */}
+        </div>
+      </Fragment>
+    )
   }
 }

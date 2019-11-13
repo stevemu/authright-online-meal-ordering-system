@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DropdownButton, Dropdown, Container } from "react-bootstrap";
+import { DropdownButton, Dropdown, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from '../../components/GenerateDropdownItem';
 
 // presentational
@@ -41,13 +41,23 @@ export default class Order extends React.Component {
     orderItems.forEach((element) => {
       items.push(
         <div key={element.itemId}>
-          <p style={{display: "flex"}}>           
-            <DropdownButton id="dropdown-basic-button" title={element.quantity} size="sm">
-              {/* <Dropdown.Item>Remove</Dropdown.Item>
-              <Dropdown.Divider /> */}
-              <GenerateDropdownItem id={element.itemId} onSelect={this.handleSelectQuantityChange} />
-            </DropdownButton>
-            {element.name} {"$"}{this.updateItemPrice(element.price, element.quantity)}
+          <p style={{display: "flex"}}>  
+            <Container>
+              <Row>
+                <Col sm={2}>
+                  <DropdownButton id="dropdown-basic-button" title={element.quantity} size="sm">
+                  {/* <Dropdown.Item>Remove</Dropdown.Item><Dropdown.Divider /> */}
+                    <GenerateDropdownItem id={element.itemId} onSelect={this.handleSelectQuantityChange} />
+                  </DropdownButton>
+                </Col>
+                <Col sm={8}>
+                  {element.name} 
+                </Col>
+                <Col sm={2}>
+                  {"$"}{this.updateItemPrice(element.price, element.quantity)}
+                </Col>
+              </Row>
+            </Container>         
           </p>
         </div>
       );
