@@ -1,5 +1,5 @@
-let {getMenu} = require("./menu");
-let {getOrder, addToOrder} = require("./order");
+let { getMenu } = require("./menu");
+let { getOrder, addToOrder, changeOrderItem } = require("./order");
 
 function configRoutes(app) {
   // get the menu
@@ -9,21 +9,23 @@ function configRoutes(app) {
     return res.json(menu);
   });
 
-  // add a thing to the order
-  app.put("/api/order", async (req, res) => {
-    let db = req.db;
-
-    let {itemId, quantity} = req.body;
-    await addToOrder(db, itemId, quantity);
-    return res.json({success: true});
-  });
-
   // get the order
   app.get("/api/order", async (req, res) => {
     let db = req.db;
 
     let order = await getOrder(db);
     return res.json(order);
+  });
+
+  // change an order item
+  // if the orderItem exist already, change its quantity
+  // if the orderItem does not exist, create the orderItem with that quantity
+  app.post("/api/order", async (req, res) => {
+    let db = req.db;
+
+    let { itemId, quantity } = req.body;
+    await changeOrderItem(db, itemId, quantity);
+    return res.json({ success: true });
   });
 }
 
