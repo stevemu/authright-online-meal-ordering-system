@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
@@ -24,12 +25,12 @@ class ItemModal extends Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={styles.context}>
-                        <div style={styles.quantity}>Quantity</div>
-                        <div style={styles.control}>
-                            <Button style={styles.controlBtn} onClick={this.props.minushandler} disabled={this.props.quantity < 2}>-</Button>
-                            <div style={styles.quantityDisplay}>{this.props.quantity}</div>
-                            <Button style={styles.controlBtn} onClick={this.props.addhandler}>+</Button>
-                        </div>
+                    <div style={styles.quantity}>Quantity</div>
+                    <div style={styles.control}>
+                        <Button style={styles.controlBtn} onClick={this.props.minushandler} disabled={this.props.quantity < 2}>-</Button>
+                        <div style={styles.quantityDisplay}>{this.props.quantity}</div>
+                        <Button style={styles.controlBtn} onClick={this.props.addhandler}>+</Button>
+                    </div>
                 </Modal.Body>
                 <Modal.Body style={styles.footer}>
                     <div>Item total: ${itemTotalPrice}</div>

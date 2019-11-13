@@ -5,7 +5,8 @@ export async function get(url, token = null) {
     }
   });
   if (!res.ok) {
-    throw "error for " + url;
+    let err = "error for " + url
+    throw err;
   }
 
   let j = await res.json();
@@ -22,7 +23,9 @@ export async function post(url, body, token = null) {
     }
   });
   if (!res.ok) {
-    throw "error for " + url;
+    let err = "error for " + url
+    throw err
+    ;
   }
   let json = await res.json();
   return json;
@@ -38,12 +41,12 @@ export async function put(url, body, token = null) {
     }
   });
   if (!res.ok) {
-    throw "error for " + url;
+    let err = "error for " + url
+    throw err;
   }
   let json = await res.json();
   return json;
 }
-
 
 // export async function del(url, body = {}, token = null) {
 //   let res = await fetch(url, {

@@ -1,72 +1,23 @@
-import React, { Component } from 'react'
-import { Table, Nav } from 'react-bootstrap'
+import React, { Component } from "react";
+import { Table } from "react-bootstrap";
 
-import styles from './MenuList.css.js'
-import ItemModal from '../ItemModal/ItemModal'
+import ItemModal from "../ItemModal/ItemModal";
+import { getMenu } from "../../utils";
+import { connect } from "react-redux";
+import { updateMenu } from "../../Redux/actions/menuAction";
 
-export default class MenuList extends Component {
+class MenuList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                {
-                    id: '1',
-                    name: 'Shrimp W. Scramble Eggs',
-                    price: '$8.95'
-                },
-                {
-                    id: '2',
-                    name: 'Beef With Marinated Sauce',
-                    price: '$8.95'
-                },
-                {
-                    id: '3',
-                    name: 'Crispy Tofu',
-                    price: '$8.95'
-                },
-                {
-                    id: '4',
-                    name: 'Kong Pao Tofu',
-                    price: '$8.95'
-                },
-                {
-                    id: '5',
-                    name: 'Kong Pao Chicken',
-                    price: '$8.95'
-                },
-                {
-                    id: '6',
-                    name: 'Chicken in Curry Sauce',
-                    price: '$8.95'
-                },
-                {
-                    id: '7',
-                    name: 'Sesame Chicken',
-                    price: '$8.95'
-                },
-                {
-                    id: '8',
-                    name: 'Three Cups Chicken',
-                    price: '$8.95'
-                },
-                {
-                    id: '9',
-                    name: 'Three Cups Chicken',
-                    price: '$8.95'
-                },
-                {
-                    id: '10',
-                    name: 'Three Cups Chicken',
-                    price: '$8.95'
-                },
-            ],
             currentData: null,
-            currentPrice: '$0.00',
+            currentPrice: "$0.00",
             quantity: 1,
             unitprice: 8.95,
             modalShow: false,
-            command: 'Add',
-        }
+            command: "Add",
+            menu: []
+        };
     }
 
     setModalShow(value) {
@@ -74,36 +25,36 @@ export default class MenuList extends Component {
             ...state,
             modalShow: value,
             quantity: 1
-        }))
+        }));
     }
 
     setQuantity(value) {
         this.setState({
-            quantity: this.state.quantity + value,
-        })
+            quantity: this.state.quantity + value
+        });
     }
 
     addHandler = () => {
         this.setState({
             quantity: this.state.quantity + 1
-        })
-    }
+        });
+    };
 
     minusHandler = () => {
         this.setState({
             quantity: this.state.quantity - 1
-        })
-    }
+        });
+    };
 
-    fetchDetails = (event) => {
+    fetchDetails = event => {
         const targetName = event.currentTarget.getAttribute("data-item");
         const targetPrice = event.currentTarget.getAttribute("data-price");
 
         this.setState({
             currentData: targetName,
             currentPrice: targetPrice
-        })
-    }
+        });
+    };
 
     updateOrder(value) {
         // use fetch to call api to push data to database.
@@ -111,12 +62,19 @@ export default class MenuList extends Component {
         this.setState(state => ({
             ...state,
             modalShow: value,
-            quantity: 1
+            quantity: 1,
         }))
     }
 
+    componentDidMount() {
+        // fetch the project name, once it retrieves resolve the promsie and update the state.
+        getMenu().then(result => this.props.updateMenu(result));
+        // console.log(this.state.menu)
+    }
+
     render() {
-        const { data, currentData, currentPrice } = this.state;
+        const { data } = this.props;
+        const { currentData, currentPrice } = this.state;
 
         return (
             <div style={styles.container}>
@@ -170,3 +128,13 @@ export default class MenuList extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    data: state.menu.menu
+});
+
+const mapDispatchToProps = dispatch => ({
+    updateMenu: menu => dispatch(updateMenu(menu))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuList);
