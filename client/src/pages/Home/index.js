@@ -2,10 +2,12 @@ import React from "react";
 import Menu from "./Menu";
 import Order from "./Order";
 
+import { Container, Col, Row } from "react-bootstrap";
+
 const container = {
-  height: '100vh',
-  fontFamily: 'Open Sans',
-}
+  height: "100vh",
+  fontFamily: "Open Sans"
+};
 
 class Home extends React.Component {
   constructor(props) {
@@ -46,8 +48,8 @@ class Home extends React.Component {
   // update order item quantity
   handleQuantity(quantity, itemId) {
     this.setState({
-      orderItems: this.state.orderItems.map(element => 
-        element.itemId === itemId ? {...element, quantity: quantity} : element
+      orderItems: this.state.orderItems.map(element =>
+        element.itemId === itemId ? { ...element, quantity: quantity } : element
       )
     });
   }
@@ -56,18 +58,26 @@ class Home extends React.Component {
     // this.setState({
     //   orderItems: this.state.orderItems.filter((element) => element.itemId !== itemId)
     // });
-    console.log('Delete!', itemId);
+    console.log("Delete!", itemId);
   }
 
   render() {
     return (
       <div style={container}>
-        <Menu />
-        <Order
-          orderItems={this.state.orderItems}
-          handleOnSelectQuantity={this.handleQuantity}
-          handleOnDelete={this.handleDelete}
-        />
+        <Container>
+          <Row>
+            <Col xs={12} md={7}>
+              <Menu />
+            </Col>
+            <Col xs={7} md={5}>
+              <Order
+                orderItems={this.state.orderItems}
+                handleOnSelectQuantity={this.handleQuantity}
+                handleOnDelete={this.handleDelete}
+              />
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }

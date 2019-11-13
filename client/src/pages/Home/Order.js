@@ -2,11 +2,15 @@ import React from "react";
 
 import { DropdownButton, Dropdown, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from '../../components/GenerateDropdownItem';
+import { getOrder } from '../../utils';
 
 // presentational
 export default class Order extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      data: {}
+    }
   
     this.handleSelectQuantityChange = this.handleSelectQuantityChange.bind(this);
     this.getSubtotal = this.getSubtotal.bind(this);
@@ -33,6 +37,14 @@ export default class Order extends React.Component {
     });
     return total;
   } 
+
+  async componentDidMount() {
+    let data = await getOrder();
+    this.setState({
+      data: data
+    });
+    console.log(data);
+  }
 
   render() {
     const orderItems = this.props.orderItems;
@@ -62,6 +74,8 @@ export default class Order extends React.Component {
         </div>
       );
     });
+
+    
 
     return (
       <div>
