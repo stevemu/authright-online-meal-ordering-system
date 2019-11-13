@@ -8,7 +8,7 @@ function GenerateDropdownItem(props) {
 
   for(let i = 1; i <= MAX_QUANTITY; i++){
     dropdowns.push(
-      <Dropdown.Item eventKey={i} onSelect={(eventKey, event) => props.onSelect(eventKey, event, props.id)}>{i}</Dropdown.Item>
+      <Dropdown.Item key={props.id+i} eventKey={i} onSelect={(eventKey, event) => props.onSelect(eventKey, event, props.id)}>{i}</Dropdown.Item>
     );
   }
 
