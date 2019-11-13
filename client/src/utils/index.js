@@ -1,7 +1,7 @@
 import {get, post, } from '../api';
 
 export async function getMenu() {
-  let json = await post('/api/menu');
+  let json = await get('/api/menu');
   return json;
 }
 

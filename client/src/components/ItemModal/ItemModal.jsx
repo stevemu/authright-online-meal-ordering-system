@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Button'
 
 import styles from './ItemModal.css.js'
-
 
 class ItemModal extends Component {
     render() {
@@ -28,17 +24,17 @@ class ItemModal extends Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body style={styles.context}>
-                    <Row>
-                        <p>Quantity</p>
-                        <Button onClick={this.props.minushandler} disabled={this.props.quantity< 2}>-</Button>
-                        <p>{this.props.quantity}</p>
-                        <Button onClick={this.props.addhandler}>+</Button>
-                    </Row>
+                        <div style={styles.quantity}>Quantity</div>
+                        <div style={styles.control}>
+                            <Button style={styles.controlBtn} onClick={this.props.minushandler} disabled={this.props.quantity < 2}>-</Button>
+                            <div style={styles.quantityDisplay}>{this.props.quantity}</div>
+                            <Button style={styles.controlBtn} onClick={this.props.addhandler}>+</Button>
+                        </div>
                 </Modal.Body>
-                <Modal.Footer>
-                    <p>Item total: ${itemTotalPrice}</p>
-                    <Button variant="primary" onClick={this.props.updateorder}>{this.props.command}</Button>
-                </Modal.Footer>
+                <Modal.Body style={styles.footer}>
+                    <div>Item total: ${itemTotalPrice}</div>
+                    <Button variant="primary" onClick={this.props.updateorder} style={styles.footerBtn}>{this.props.command}</Button>
+                </Modal.Body>
             </Modal >
         );
     }

@@ -3,10 +3,6 @@ import { Table } from 'react-bootstrap'
 
 import ItemModal from '../ItemModal/ItemModal'
 
-// const table = {
-//     overflow: 'scroll',
-// }
-
 export default class MenuList extends Component {
     constructor(props) {
         super(props);
