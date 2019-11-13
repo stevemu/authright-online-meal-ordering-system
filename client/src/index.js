@@ -3,8 +3,31 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux'
 
-// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';\
+
+
+
+
+// reducer
+const initialState = {
+  quantity: 0
+}
+
+const counter = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case 'INCREMENT':
+      return state.quantity + 1
+    case 'DECREMENT':
+      return state.quantity - 1
+    default:
+      return state
+  }
+}
+
+let store = createStore(counter)
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
