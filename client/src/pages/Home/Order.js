@@ -2,23 +2,21 @@ import React from "react";
 
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import GenerateDropdownItem from '../../components/GenerateDropdownItem';
+import { number } from "prop-types";
 
 // presentational
 export default class Order extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      subtotal: 0
-    }
 
     this.handleSelectQuantityChange = this.handleSelectQuantityChange.bind(this);
-    this.handleSubtotal = this.handleSubtotal.bind(this);
+    this.getSubtotal = this.getSubtotal.bind(this);
   }
 
   handleSubtotal(itemPrice) {
     this.setState({
       subtotal: this.state.subtotal + itemPrice
-    })
+    });
   }
 
   // A method to update the item price based on its quantity 
@@ -34,9 +32,14 @@ export default class Order extends React.Component {
     this.props.handleOnSelectQuantity(quantity, itemId);
   }
 
+  getSubtotal(items) {
+    return items.reduce((acc, cur) => acc+cur).toFixed(2);
+  } 
+
   render() {
     const orderItems = this.props.orderItems;
     const items = [];
+    let subtotal = 0;
 
     orderItems.forEach((element) => {
       items.push(
@@ -52,13 +55,13 @@ export default class Order extends React.Component {
         </div>
       );
       // calculate the subtotal price here
-      {this.handleSubtotal(element.price)}
+      // subtotal += element.price;
     });
 
     return (
       <div>
         <h1>Order Summary</h1>
-        <h5>Subtotal {"$"}{this.state.subtotal.toFixed(2)}</h5>
+        <h5>Subtotal {"$"}{this.getSubtotal(orderItems)}</h5>
         {items}
       </div>
     );
