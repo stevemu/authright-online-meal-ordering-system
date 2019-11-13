@@ -11,7 +11,6 @@ export default class Menu extends Component {
       <Fragment>
         <Navigation />
         <div>
-          {/* <Container> */}
             <Row>
               <Col xs={7}>
                 <Restaurant />
@@ -21,7 +20,6 @@ export default class Menu extends Component {
                 right
             </Col>
             </Row>
-          {/* </Container> */}
         </div>
       </Fragment>
     )

@@ -48,7 +48,6 @@ export async function put(url, body, token = null) {
   return json;
 }
 
-
 // export async function del(url, body = {}, token = null) {
 //   let res = await fetch(url, {
 //     method: "DELETE",
