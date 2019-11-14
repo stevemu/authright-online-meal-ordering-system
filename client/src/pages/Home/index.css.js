@@ -17,7 +17,7 @@ export default {
     info: {
         gridColumn: '1/2',
         display: 'grid',
-        gridTemplateRows: '30% 70%',
+        gridTemplateRows: '25% 75%',
         overflow: 'scroll'
     },
     restaurant: {

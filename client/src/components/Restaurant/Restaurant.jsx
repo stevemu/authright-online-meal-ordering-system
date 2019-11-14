@@ -13,7 +13,7 @@ export default class Restaurant extends Component {
                 <Jumbotron style={styles.JumbotronStyle}>
                     <h1>Taipei Cuisine</h1>
                     <p>68 Billings Rd, Quincy, MA 02171</p>
-                    <GroupButton />
+                    {/* <GroupButton /> */}
                 </Jumbotron>
             </div >
         )
