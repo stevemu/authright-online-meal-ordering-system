@@ -24,7 +24,11 @@ class Home extends React.Component {
           <Row>
             <Col xs={7}>
               <Restaurant />
-              <MenuList />
+              <MenuList
+                updateMenu={this.props.updateMenu}
+                updateOrder={this.props.updateOrder}
+                menu={this.props.menu}
+              />
             </Col>
             <Col xs={5}>
               <h1>Order summary</h1>
@@ -50,5 +54,8 @@ const mapDispatchToProps = dispatch => ({
   updateOrder: order => dispatch(updateOrder(order)),
   updateMenu: menu => dispatch(updateMenu(menu))
 });
+
+// test
+//123123
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
