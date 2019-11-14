@@ -70,7 +70,6 @@ class MenuList extends Component {
             quantity: 1,
         }))
 
-
         // send change of order item to backend
         let itemId = this.state.currentItemId;
         let quantity = this.state.quantity;

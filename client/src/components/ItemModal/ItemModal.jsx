@@ -29,7 +29,7 @@ class ItemModal extends Component {
                     <div style={styles.control}>
                         <Button style={styles.controlBtn} onClick={this.props.minushandler} disabled={this.props.quantity < 2}>-</Button>
                         <div style={styles.quantityDisplay}>{this.props.quantity}</div>
-                        <Button style={styles.controlBtn} onClick={this.props.addhandler}>+</Button>
+                        <Button style={styles.controlBtn} onClick={this.props.addhandler} disabled={this.props.quantity > 4}>+</Button>
                     </div>
                 </Modal.Body>
                 <Modal.Body style={styles.footer}>
