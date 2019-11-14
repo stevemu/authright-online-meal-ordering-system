@@ -28,15 +28,7 @@ class OrderSummary extends Component {
     items.forEach(element => {
       total += element.price * element.quantity;
     });
-    return total;
-  }
-
-  // poll menu data
-  async componentDidMount() {
-    let data = await getMenu();
-    this.setState({
-      menu: data
-    });
+    return total.toFixed(2);
   }
 
   render() {
@@ -81,8 +73,6 @@ class OrderSummary extends Component {
           {this.getSubtotal(orderItems)}
         </h5>
         {items}
-
-        {/* <h2>{this.props.counter}</h2> */}
       </div>
     );
   }
