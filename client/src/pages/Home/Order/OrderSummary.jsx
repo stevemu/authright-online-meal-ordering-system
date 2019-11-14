@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DropdownButton, Container, Col, Row } from "react-bootstrap";
+import { DropdownButton, Dropdown, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from "../../../components/GenerateDropdownItem";
 // import { getMenu } from "../../../utils";
 
@@ -52,6 +52,8 @@ class OrderSummary extends Component {
                     title={element.quantity}
                     size="sm"
                   >
+                    <Dropdown.Item>Remove</Dropdown.Item>
+                    <Dropdown.Divider />
                     <GenerateDropdownItem
                       id={element.itemId}
                       onSelect={this.handleSelectQuantityChange}
