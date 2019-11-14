@@ -3,8 +3,8 @@ import { DropdownButton, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from "../../../components/GenerateDropdownItem";
 // import { getMenu } from "../../../utils";
 
-import styles from './OrderSummary.css.js'
-import CheckoutButton from '../../../components/Button/CheckoutButton'
+import styles from "./OrderSummary.css.js";
+import CheckoutButton from "../../../components/Button/CheckoutButton";
 
 class OrderSummary extends Component {
   constructor(props) {
@@ -27,9 +27,11 @@ class OrderSummary extends Component {
 
   // calculate the subtotal price here
   getSubtotal(items) {
+
+    // debugger;
     let total = 0;
     items.forEach(element => {
-      total += element.price * element.quantity;
+      total += Number(element.price.replace(/[^0-9.-]+/, "")) * element.quantity;
     });
     return total.toFixed(2);
   }
@@ -59,9 +61,11 @@ class OrderSummary extends Component {
                 <Col sm={8}>{element.name}</Col>
                 <Col sm={2}>
                   {"$"}
-              
 
-                  {this.updateItemPrice(Number(element.price.replace(/[^0-9.-]+/, "")), element.quantity)}
+                  {this.updateItemPrice(
+                    Number(element.price.replace(/[^0-9.-]+/, "")),
+                    element.quantity
+                  )}
                 </Col>
               </Row>
             </Container>
@@ -73,21 +77,17 @@ class OrderSummary extends Component {
     return (
       <>
         <div style={styles.summary}>
+          <div>Subtotal</div>
           <div>
-            Subtotal
-          </div>
-          <div>
-            {"$"}{this.getSubtotal(orderItems)}
+            {"$"}
+            {this.getSubtotal(orderItems)}
           </div>
         </div>
-        <div style={styles.items}>
-          {items}
-        </div>
+        <div style={styles.items}>{items}</div>
         <CheckoutButton />
       </>
     );
   }
 }
-
 
 export default OrderSummary;
