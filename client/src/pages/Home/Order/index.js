@@ -36,15 +36,11 @@ export default class Order extends React.Component {
 
   // update order item quantity
   handleQuantity(quantity, itemId) {
-
-    // debugger;
     let newOrder = {
       ...this.state.order,
       [itemId]: parseInt(quantity)
     };
 
-    // debugger;
-    // console.log();
     this.setState({order: newOrder});
   }
 
