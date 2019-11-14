@@ -29,7 +29,7 @@ export default class Order extends React.Component {
 
   // http polling
   componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
+    this.timerID = setInterval(() => this.tick(), 500);
   }
 
   async tick() {
