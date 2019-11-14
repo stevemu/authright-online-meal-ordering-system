@@ -1,4 +1,4 @@
-const initialState = {a: '333'}
+const initialState = {}
 
 const orderReducer = (state = initialState, { type, payload }) => {
   switch (type) {
