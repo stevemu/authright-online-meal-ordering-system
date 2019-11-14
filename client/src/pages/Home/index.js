@@ -4,19 +4,13 @@ import { connect } from "react-redux";
 import { updateOrder } from "../../Redux/actions/orderAction";
 import { updateMenu } from "../../Redux/actions/menuAction";
 
+import Order from "./Order";
+import styles from './index.css.js'
 import MenuList from "./MenuList/MenuList";
 import Navigation from "../../components/Navbar/Navigation";
 import Restaurant from "../../components/Restaurant/Restaurant";
 
-import { Container, Row, Col } from "react-bootstrap";
-import styles from './index.css.js'
-import Order from "./Order";
-
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div style={styles.container}>

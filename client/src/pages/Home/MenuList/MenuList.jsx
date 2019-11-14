@@ -102,14 +102,19 @@ class MenuList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
-                            <tr key={index}
-                                data-price={item.price}
-                                data-item={item.name}
-                                onClick={(event) => { this.setModalShow(true); this.fetchDetails(event); }}>
-                                <td>{item.itemId}</td>
-                                <td>{item.name}</td>
-                                <td>{item.price}</td>
+                        {Object.keys(data).map((key, index) => (
+                            <tr
+                                key={key}
+                                data-price={data[key].price}
+                                data-item={data[key].name}
+                                onClick={event => {
+                                    this.setModalShow(true);
+                                    this.fetchDetails(event);
+                                }}
+                            >
+                                <td>{data[key].ItemId}</td>
+                                <td>{data[key].name}</td>
+                                <td>{data[key].price}</td>
                             </tr>
                         ))}
                     </tbody>

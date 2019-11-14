@@ -18,7 +18,6 @@ export default class Order extends React.Component {
     };
 
     this.handleQuantity = this.handleQuantity.bind(this);
-    // this.handleDelete = this.handleDelete.bind(this);
   }
 
   async componentDidMount() {

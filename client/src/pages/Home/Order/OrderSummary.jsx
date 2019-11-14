@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { DropdownButton, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from "../../../components/GenerateDropdownItem";
-import { getMenu, postOrder } from "../../../utils";
+import { getMenu } from "../../../utils";
 
 import styles from './OrderSummary.css.js'
 import CheckoutButton from '../../../components/Button/CheckoutButton'
