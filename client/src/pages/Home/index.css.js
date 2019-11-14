@@ -30,5 +30,6 @@ export default {
         gridColumn: '2/3',
         display: 'grid',
         gridTemplateRows: '10% 80% 10%',
+        borderLeft: '1px solid lightgrey', 
     }
 }
