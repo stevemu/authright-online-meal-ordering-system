@@ -59,7 +59,9 @@ class OrderSummary extends Component {
                 <Col sm={8}>{element.name}</Col>
                 <Col sm={2}>
                   {"$"}
-                  {this.updateItemPrice(element.price, element.quantity)}
+              
+
+                  {this.updateItemPrice(Number(element.price.replace(/[^0-9.-]+/, "")), element.quantity)}
                 </Col>
               </Row>
             </Container>

@@ -112,7 +112,7 @@ class MenuList extends Component {
                                     this.fetchDetails(event);
                                 }}
                             >
-                                <td>{data[key].ItemId}</td>
+                                <td>{data[key].itemId}</td>
                                 <td>{data[key].name}</td>
                                 <td>{data[key].price}</td>
                             </tr>
