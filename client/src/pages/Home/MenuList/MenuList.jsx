@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Table, Nav } from "react-bootstrap";
 
-import { getMenu } from "../../utils";
+import { getMenu } from "../../../utils";
 import { connect } from "react-redux";
-import { updateMenu } from "../../Redux/actions/menuAction";
+import { updateMenu } from "../../../Redux/actions/menuAction";
 
 import styles from './MenuList.css.js'
-import ItemModal from "../ItemModal/ItemModal";
+import ItemModal from "../../../components/ItemModal/ItemModal";
 
 class MenuList extends Component {
     constructor(props) {
