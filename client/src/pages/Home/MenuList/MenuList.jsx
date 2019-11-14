@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table, Nav } from "react-bootstrap";
 
-import { getMenu } from "../../../utils";
+import { getMenu, updateOrderItem } from "../../../utils";
 import { connect } from "react-redux";
 import { updateMenu } from "../../../Redux/actions/menuAction";
 
@@ -14,6 +14,7 @@ class MenuList extends Component {
         this.state = {
             currentData: null,
             currentPrice: "$0.00",
+            currentItemId: null,
             quantity: 1,
             unitprice: 8.95,
             modalShow: false,
@@ -51,21 +52,31 @@ class MenuList extends Component {
     fetchDetails = event => {
         const targetName = event.currentTarget.getAttribute("data-item");
         const targetPrice = event.currentTarget.getAttribute("data-price");
+        const targetId = event.currentTarget.getAttribute("data-id");
 
         this.setState({
             currentData: targetName,
-            currentPrice: targetPrice
+            currentPrice: targetPrice,
+            currentItemId: targetId,
         });
     };
 
-    updateOrder(value) {
+    async updateOrder(value) {
         // use fetch to call api to push data to database.
-        console.log('update order')
+        // console.log('update order')
         this.setState(state => ({
             ...state,
             modalShow: value,
             quantity: 1,
         }))
+
+
+        // send change of order item to backend
+        let itemId = this.state.currentItemId;
+        let quantity = this.state.quantity;
+
+        await updateOrderItem(itemId, quantity);
+
     }
 
     componentDidMount() {
@@ -107,6 +118,7 @@ class MenuList extends Component {
                                 key={key}
                                 data-price={data[key].price}
                                 data-item={data[key].name}
+                                data-id={data[key].itemId}
                                 onClick={event => {
                                     this.setModalShow(true);
                                     this.fetchDetails(event);
