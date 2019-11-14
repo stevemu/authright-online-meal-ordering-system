@@ -81,7 +81,6 @@ class MenuList extends Component {
     componentDidMount() {
         // fetch the project name, once it retrieves resolve the promsie and update the state.
         getMenu().then(result => this.props.updateMenu(result));
-        // console.log(this.state.menu)
     }
 
     render() {
@@ -98,9 +97,9 @@ class MenuList extends Component {
                         <Nav.Item>
                             <Nav.Link href="/">Lunch Special</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
+                        {/* <Nav.Item>
                             <Nav.Link eventKey="link-1">Chef's Specialties</Nav.Link>
-                        </Nav.Item>
+                        </Nav.Item> */}
                     </div>
                 </Nav>
                 <Table style={styles.table} responsive>
@@ -108,7 +107,7 @@ class MenuList extends Component {
                         <tr>
                             <th>ID</th>
                             <th>Lunch Special</th>
-                            <th> </th>
+                            <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>

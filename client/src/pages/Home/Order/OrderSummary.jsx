@@ -84,7 +84,7 @@ class OrderSummary extends Component {
           </div>
         </div>
         <div style={styles.items}>{items}</div>
-        <CheckoutButton />
+        {/* <CheckoutButton /> */}
       </>
     );
   }
