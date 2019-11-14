@@ -1,14 +1,9 @@
-const initialState = {
-  order: []
-}
+const initialState = {}
 
 const orderReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'UPDATE_ORDER':
-      return {
-        ...state,
-        order: payload
-      }
+      return payload;
 
     default:
       return state

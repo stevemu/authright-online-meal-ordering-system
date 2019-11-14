@@ -4,7 +4,7 @@ import { Dropdown } from "react-bootstrap";
 
 function GenerateDropdownItem(props) {
   const dropdowns = [];
-  const MAX_QUANTITY = 25;
+  const MAX_QUANTITY = 5;
 
   for(let i = 1; i <= MAX_QUANTITY; i++){
     dropdowns.push(

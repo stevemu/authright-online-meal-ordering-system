@@ -132,7 +132,7 @@ class MenuList extends Component {
 }
 
 const mapStateToProps = state => ({
-    data: state.menu.menu
+    data: state.menu
 });
 
 const mapDispatchToProps = dispatch => ({

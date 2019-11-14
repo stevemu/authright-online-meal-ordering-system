@@ -1,15 +1,9 @@
-const initialState = {
-  menu: []
-}
+const initialState = {}
 
 const menuReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case 'UPDATE_MENU':
-      return {
-        ...state,
-        menu: payload
-      }
-
+      return payload;
     default:
       return state
   }
