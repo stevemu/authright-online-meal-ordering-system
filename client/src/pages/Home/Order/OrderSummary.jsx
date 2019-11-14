@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { DropdownButton, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from "../../../components/GenerateDropdownItem";
-import { getMenu } from "../../../utils";
+// import { getMenu } from "../../../utils";
 
 import styles from './OrderSummary.css.js'
 import CheckoutButton from '../../../components/Button/CheckoutButton'
@@ -31,15 +31,7 @@ class OrderSummary extends Component {
     items.forEach(element => {
       total += element.price * element.quantity;
     });
-    return total;
-  }
-
-  // poll menu data
-  async componentDidMount() {
-    let data = await getMenu();
-    this.setState({
-      menu: data
-    });
+    return total.toFixed(2);
   }
 
   render() {
