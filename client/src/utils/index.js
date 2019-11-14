@@ -1,13 +1,23 @@
-import {get, post, } from '../api';
+import { get, post, } from '../api';
 
 export async function getMenu() {
   let json = await get('/api/menu');
-  return json;
+  let parsedjson = {};
+  for (let i = 0, tem; i < json.length; i++) {
+    tem = json[i];
+    parsedjson[tem.itemId] = tem;
+  }
+  return parsedjson;
 }
 
 export async function getOrder() {
   let json = await get('/api/order');
-  return json;
+  let parsedjson = {};
+  for (let i = 0, tem; i < json.length; i++) {
+    tem = json[i];
+    parsedjson[tem.itemId] = tem;
+  }
+  return parsedjson;
 }
 
 export async function postOrder(itemId, quantity) {
