@@ -22,6 +22,18 @@ export default class Order extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  async componentDidMount() {
+    // console.log(this.props.menu);
+    let order = await getOrder();
+    this.props.updateOrder(order);
+    // console.log(order);
+  }
+
+  componentDidUpdate() {
+    console.log(this.props.menu);
+    console.log(this.props.order);
+  }
+
   // update order item quantity
   handleQuantity(quantity, itemId) {
 

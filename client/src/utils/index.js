@@ -11,13 +11,19 @@ export async function getMenu() {
 }
 
 export async function getOrder() {
-  let json = await get('/api/order');
-  let parsedjson = {};
-  for (let i = 0, tem; i < json.length; i++) {
-    tem = json[i];
-    parsedjson[tem.itemId] = tem;
+  let orderItems = await get('/api/order');
+  let normalizedOrder = {};
+  for (let orderItem of orderItems) {
+    let {itemId, quantity} = orderItem;
+    normalizedOrder[itemId] = quantity;
   }
-  return parsedjson;
+  return normalizedOrder;
+  // let parsedjson = {};
+  // for (let i = 0, tem; i < json.length; i++) {
+  //   tem = json[i];
+  //   parsedjson[tem.itemId] = tem;
+  // }
+  // return parsedjson;
 }
 
 export async function postOrder(itemId, quantity) {

@@ -1,42 +1,54 @@
 import React from "react";
-import Menu from "./Menu";
+import { connect } from "react-redux";
+
+import { updateOrder } from "../../Redux/actions/orderAction";
+import { updateMenu } from "../../Redux/actions/menuAction";
+
+import MenuList from "./MenuList/MenuList";
+import Navigation from "../../components/Navbar/Navigation";
+import Restaurant from "../../components/Restaurant/Restaurant";
+
+import { Container, Row, Col } from "react-bootstrap";
+import Order from "./Order";
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <div>
-        <Menu />
-      </div>
+      <>
+        <Navigation />
+        <div>
+          <Row>
+            <Col xs={7}>
+              <Restaurant />
+              <MenuList />
+            </Col>
+            <Col xs={5}>
+              <h1>Order summary</h1>
+              <Order
+                updateOrder={this.props.updateOrder}
+                order={this.props.order}
+                menu={this.props.menu}
+              />
+            </Col>
+          </Row>
+        </div>
+      </>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  order: state.order,
+  menu: state.menu
+});
 
+const mapDispatchToProps = dispatch => ({
+  updateOrder: order => dispatch(updateOrder(order)),
+  updateMenu: menu => dispatch(updateMenu(menu))
+});
 
-// orderItem: [
-//   {
-//     itemId: "item1",
-//     name: "Roast Beef With Hot Chili Pepper Rolled In Scallion Pancake",
-//     quantity: 2,
-//     price: 9.5
-//   },
-//   {
-//     itemId: "item2",
-//     name: "Scallions Pancake",
-//     quantity: 4,
-//     price: 5.95
-//   },
-//   {
-//     itemId: "item3",
-//     name: "Szechuan Wonton With Red Chilli Sauce",
-//     quantity: 1,
-//     price: 6.95
-//   },
-//   {
-//     itemId: "item4",
-//     name: "Cucumber In Chili Sauce",
-//     quantity: 2,
-//     price: 7.5
-//   }
-// ]
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
