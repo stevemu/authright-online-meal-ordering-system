@@ -1,5 +1,5 @@
 let { getMenu } = require("./menu");
-let { getOrder, addToOrder, changeOrderItem } = require("./order");
+let { getOrder, addToOrder, changeOrderItem, deleteOrderItem } = require("./order");
 
 function configRoutes(app) {
   // get the menu
@@ -25,6 +25,14 @@ function configRoutes(app) {
 
     let { itemId, quantity } = req.body;
     await changeOrderItem(db, itemId, quantity);
+    return res.json({ success: true });
+  });
+
+  app.delete("/api/order", async (req, res) => {
+    let db = req.db;
+
+    let { itemId } = req.body;
+    await deleteOrderItem(db, itemId);
     return res.json({ success: true });
   });
 }

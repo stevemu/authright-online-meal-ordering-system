@@ -44,3 +44,9 @@ async function changeOrderItem(db, itemId, quantity) {
   }
 }
 exports.changeOrderItem = changeOrderItem;
+
+async function deleteOrderItem(db, itemId) {
+  const collection = db.collection("order");
+  await collection.remove({itemId});
+}
+exports.deleteOrderItem = deleteOrderItem;
