@@ -48,18 +48,18 @@ export async function put(url, body, token = null) {
   return json;
 }
 
-// export async function del(url, body = {}, token = null) {
-//   let res = await fetch(url, {
-//     method: "DELETE",
-//     body: JSON.stringify(body),
-//     headers: {
-//       "Content-type": "application/json; charset=UTF-8",
-//       Authorization: `Bearer ${token}`
-//     }
-//   });
-//   if (!res.ok) {
-//     throw "error for " + url;
-//   }
-//   let json = await res.json();
-//   return json;
-// }
+export async function del(url, body = {}, token = null) {
+  let res = await fetch(url, {
+    method: "DELETE",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${token}`
+    }
+  });
+  if (!res.ok) {
+    throw "error for " + url;
+  }
+  let json = await res.json();
+  return json;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { getOrder, updateOrderItem } from "../../../utils";
+import { getOrder, updateOrderItem, deleteOrderItem } from "../../../utils";
 
 import OrderSummary from "./OrderSummary.jsx";
 
@@ -26,7 +26,6 @@ export default class Order extends React.Component {
 
     this.props.updateOrder(newOrder);
     await updateOrderItem(itemId, quantity);
-
   }
 
   async tick() {
@@ -53,11 +52,18 @@ export default class Order extends React.Component {
     return arr;
   }
 
-  render() {
+  onOrderItemDelete = async itemId => {
+    await deleteOrderItem(itemId);
+  };
 
+  render() {
     return (
       <OrderSummary
-        orderItems={this.generateFullOrderItems(this.props.menu, this.props.order)}
+        orderItems={this.generateFullOrderItems(
+          this.props.menu,
+          this.props.order
+        )}
+        onOrderItemDelete={this.onOrderItemDelete}
         handleOnSelectQuantity={this.handleQuantity}
       />
     );

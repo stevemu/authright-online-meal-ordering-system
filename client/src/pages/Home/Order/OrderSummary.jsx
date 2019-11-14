@@ -36,6 +36,10 @@ class OrderSummary extends Component {
     return total.toFixed(2);
   }
 
+  onSelectDelete = () => {
+
+  }
+
   render() {
     const orderItems = this.props.orderItems;
     const items = []; // to hold JSX
@@ -52,7 +56,11 @@ class OrderSummary extends Component {
                     title={element.quantity}
                     size="sm"
                   >
-                    <Dropdown.Item>Remove</Dropdown.Item>
+                    <Dropdown.Item onSelect={() => {
+                      this.props.onOrderItemDelete(element.itemId);
+                    }}>
+                      Remove
+                    </Dropdown.Item>
                     <Dropdown.Divider />
                     <GenerateDropdownItem
                       id={element.itemId}
