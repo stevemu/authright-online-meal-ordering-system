@@ -23,8 +23,15 @@ export default class Order extends React.Component {
   }
 
   async componentDidMount() {
+    // console.log(this.props.menu);
     let order = await getOrder();
-    console.log(order);
+    this.props.updateOrder(order);
+    // console.log(order);
+  }
+
+  componentDidUpdate() {
+    console.log(this.props.menu);
+    console.log(this.props.order);
   }
 
   // update order item quantity

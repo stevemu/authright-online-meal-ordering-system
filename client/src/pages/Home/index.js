@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { updateOrder } from "../../Redux/actions/orderAction";
+import { updateMenu } from "../../Redux/actions/menuAction";
 
 import MenuList from "./MenuList/MenuList";
 import Navigation from "../../components/Navbar/Navigation";
@@ -27,7 +28,11 @@ class Home extends React.Component {
             </Col>
             <Col xs={5}>
               <h1>Order summary</h1>
-              <Order />
+              <Order
+                updateOrder={this.props.updateOrder}
+                order={this.props.order}
+                menu={this.props.menu}
+              />
             </Col>
           </Row>
         </div>
@@ -36,13 +41,14 @@ class Home extends React.Component {
   }
 }
 
-
 const mapStateToProps = state => ({
-  order: state.order
+  order: state.order,
+  menu: state.menu
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateOrder: order => dispatch(updateOrder(order))
+  updateOrder: order => dispatch(updateOrder(order)),
+  updateMenu: menu => dispatch(updateMenu(menu))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

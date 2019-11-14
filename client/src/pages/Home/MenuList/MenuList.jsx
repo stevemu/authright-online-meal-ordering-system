@@ -72,7 +72,13 @@ class MenuList extends Component {
     // fetch the project name, once it retrieves resolve the promsie and update the state.
     getMenu().then(result => this.props.updateMenu(result));
     // console.log(this.state.menu)
+
+
   }
+
+  // componentDidUpdate() {
+
+  // }
 
   render() {
     const { data } = this.props;
@@ -141,7 +147,7 @@ class MenuList extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.menu.menu
+  data: state.menu
 });
 
 const mapDispatchToProps = dispatch => ({
