@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DropdownButton, Container, Col, Row } from "react-bootstrap";
+import { DropdownButton, Dropdown, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from "../../../components/GenerateDropdownItem";
 // import { getMenu } from "../../../utils";
 
@@ -27,11 +27,11 @@ class OrderSummary extends Component {
 
   // calculate the subtotal price here
   getSubtotal(items) {
-
     // debugger;
     let total = 0;
     items.forEach(element => {
-      total += Number(element.price.replace(/[^0-9.-]+/, "")) * element.quantity;
+      total +=
+        Number(element.price.replace(/[^0-9.-]+/, "")) * element.quantity;
     });
     return total.toFixed(2);
   }
@@ -52,6 +52,8 @@ class OrderSummary extends Component {
                     title={element.quantity}
                     size="sm"
                   >
+                    <Dropdown.Item>Remove</Dropdown.Item>
+                    <Dropdown.Divider />
                     <GenerateDropdownItem
                       id={element.itemId}
                       onSelect={this.handleSelectQuantityChange}
