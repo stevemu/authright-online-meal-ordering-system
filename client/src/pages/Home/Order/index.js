@@ -1,7 +1,7 @@
 import React from "react";
 import { getOrder, updateOrderItem } from "../../../utils";
 
-import OrderSummary from "./OrderSummary";
+import OrderSummary from "./OrderSummary.jsx";
 
 export default class Order extends React.Component {
   constructor(props) {
@@ -13,6 +13,8 @@ export default class Order extends React.Component {
   async componentDidMount() {
     let order = await getOrder();
     this.props.updateOrder(order);
+
+    this.timerID = setInterval(() => this.tick(), 500);
   }
 
   // update order item quantity
@@ -25,11 +27,6 @@ export default class Order extends React.Component {
     this.props.updateOrder(newOrder);
     await updateOrderItem(itemId, quantity);
 
-  }
-
-  // http polling
-  componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 500);
   }
 
   async tick() {
