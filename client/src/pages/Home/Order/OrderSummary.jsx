@@ -27,11 +27,11 @@ class OrderSummary extends Component {
 
   // calculate the subtotal price here
   getSubtotal(items) {
-
     // debugger;
     let total = 0;
     items.forEach(element => {
-      total += Number(element.price.replace(/[^0-9.-]+/, "")) * element.quantity;
+      total +=
+        Number(element.price.replace(/[^0-9.-]+/, "")) * element.quantity;
     });
     return total.toFixed(2);
   }
