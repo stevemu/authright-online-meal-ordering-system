@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { DropdownButton, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from "../../../components/GenerateDropdownItem";
-import { getMenu, postOrder } from "../../../utils";
+// import { getMenu } from "../../../utils";
+
+import styles from './OrderSummary.css.js'
+import CheckoutButton from '../../../components/Button/CheckoutButton'
 
 class OrderSummary extends Component {
   constructor(props) {
@@ -28,15 +31,7 @@ class OrderSummary extends Component {
     items.forEach(element => {
       total += element.price * element.quantity;
     });
-    return total;
-  }
-
-  // poll menu data
-  async componentDidMount() {
-    let data = await getMenu();
-    this.setState({
-      menu: data
-    });
+    return total.toFixed(2);
   }
 
   render() {
@@ -74,16 +69,20 @@ class OrderSummary extends Component {
     });
 
     return (
-      <div>
-        <h1>Order Summary</h1>
-        <h5>
-          Subtotal {"$"}
-          {this.getSubtotal(orderItems)}
-        </h5>
-        {items}
-
-        {/* <h2>{this.props.counter}</h2> */}
-      </div>
+      <>
+        <div style={styles.summary}>
+          <div>
+            Subtotal
+          </div>
+          <div>
+            {"$"}{this.getSubtotal(orderItems)}
+          </div>
+        </div>
+        <div style={styles.items}>
+          {items}
+        </div>
+        <CheckoutButton />
+      </>
     );
   }
 }

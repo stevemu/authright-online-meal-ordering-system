@@ -1,7 +1,7 @@
 export default {
     container: {
         padding: '0rem 2rem', 
-        border: '1px solid lightgrey', 
+        borderRight: '1px solid lightgrey', 
     },
     header: {
         display: 'grid',
