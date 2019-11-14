@@ -19,12 +19,6 @@ class OrderSummary extends Component {
   }
 
   handleSelectQuantityChange(quantity, e, itemId) {
-    // sent back the updated quantity to API
-    // console.log(itemId, quantity);
-    // await postOrder(quantity, itemId);
-
-    // update the quantity in the data
-    // console.log(e.target.parentNode.parentNode.parentNode.parentNode.key);
     this.props.handleOnSelectQuantity(quantity, itemId);
   }
 
@@ -47,18 +41,7 @@ class OrderSummary extends Component {
 
   render() {
     const orderItems = this.props.orderItems;
-    // const menu = this.props.menu;
     const items = []; // to hold JSX
-
-    // const orderSummary = [];
-    // get the ordered foods from the menu collections with itemId
-    // menu.forEach(item => {
-    //   orderItem.forEach(el => {
-    //     if (item.itemId === el.itemId) {
-    //       orderSummary.push({ _id: el._id, ...item, quantity: el.quantity });
-    //     }
-    //   });
-    // });
 
     orderItems.forEach(element => {
       items.push(
@@ -72,7 +55,6 @@ class OrderSummary extends Component {
                     title={element.quantity}
                     size="sm"
                   >
-                    {/* <Dropdown.Item>Remove</Dropdown.Item><Dropdown.Divider /> */}
                     <GenerateDropdownItem
                       id={element.itemId}
                       onSelect={this.handleSelectQuantityChange}
