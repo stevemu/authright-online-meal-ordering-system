@@ -28,6 +28,16 @@ export async function updateOrderItem(itemId, quantity) {
   return json;
 }
 
+// add to existing quantity if order item exist
+export async function addOrderItem(itemId, quantity) {
+  let json = await post("/api/order/add", {
+    itemId,
+    quantity
+  });
+  return json;
+}
+
+
 export async function deleteOrderItem(itemId) {
   let json = await del("/api/order", {
     itemId

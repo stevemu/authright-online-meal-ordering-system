@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Table, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
-import { getMenu, updateOrderItem } from "../../../utils";
+import { getMenu, updateOrderItem, addOrderItem } from "../../../utils";
 import { connect } from "react-redux";
 import { updateMenu } from "../../../Redux/actions/menuAction";
 
-import styles from './MenuList.css.js'
+import styles from "./MenuList.css.js";
 import ItemModal from "../../../components/ItemModal/ItemModal";
 
 class MenuList extends Component {
@@ -21,66 +21,72 @@ class MenuList extends Component {
             command: "Add",
             menu: []
         };
-    }
 
-    setModalShow(value) {
-        this.setState(state => ({
-            ...state,
-            modalShow: value,
-            quantity: 1
-        }));
-    }
+        setModalShow(value) {
+            this.setState(state => ({
+                ...state,
+                modalShow: value,
+                quantity: 1
+            }));
+        }
 
-    setQuantity(value) {
-        this.setState({
-            quantity: this.state.quantity + value
-        });
-    }
+        setQuantity(value) {
+            this.setState({
+                quantity: this.state.quantity + value
+            });
+        }
 
-    addHandler = () => {
-        this.setState({
-            quantity: this.state.quantity + 1
-        });
-    };
+        addHandler = () => {
+            this.setState({
+                quantity: this.state.quantity + 1
+            });
+        };
 
-    minusHandler = () => {
-        this.setState({
-            quantity: this.state.quantity - 1
-        });
-    };
+        minusHandler = () => {
+            this.setState({
+                quantity: this.state.quantity - 1
+            });
+        };
 
-    fetchDetails = event => {
-        const targetName = event.currentTarget.getAttribute("data-item");
-        const targetPrice = event.currentTarget.getAttribute("data-price");
-        const targetId = event.currentTarget.getAttribute("data-id");
+        fetchDetails = event => {
+            const targetName = event.currentTarget.getAttribute("data-item");
+            const targetPrice = event.currentTarget.getAttribute("data-price");
+            const targetId = event.currentTarget.getAttribute("data-id");
 
-        this.setState({
-            currentData: targetName,
-            currentPrice: targetPrice,
-            currentItemId: targetId,
-        });
-    };
+            // get the quantity from order with itemId, default is 1
+            // let quantity = 1;
+            // if (this.props.order[targetId]) {
+            //     quantity = this.props.order[targetId];
+            // }
 
-    async updateOrder(value) {
-        // use fetch to call api to push data to database.
-        // console.log('update order')
-        this.setState(state => ({
-            ...state,
-            modalShow: value,
-            quantity: 1,
-        }))
+            this.setState({
+                currentData: targetName,
+                currentPrice: targetPrice,
+                currentItemId: targetId,
+                //   quantity
+            });
+        };
 
-        // send change of order item to backend
-        let itemId = this.state.currentItemId;
-        let quantity = this.state.quantity;
+        async updateOrder(value) {
+            // use fetch to call api to push data to database.
+            // console.log('update order')
+            this.setState(state => ({
+                ...state,
+                modalShow: value,
+                quantity: 1
+            }));
 
-        await updateOrderItem(itemId, quantity);
+            // send change of order item to backend
+            let itemId = this.state.currentItemId;
+            let quantity = this.state.quantity;
 
-    }
+            await addOrderItem(itemId, quantity);
+        }
 
-    componentDidMount() {
-        // fetch the project name, once it retrieves resolve the promsie and update the state.
-        getMenu().then(result => this.props.updateMenu(result));
+        componentDidMount() {
+            // fetch the project name, once it retrieves resolve the promsie and update the state.
+            getMenu().then(result => this.props.updateMenu(result));
+        }
     }
 
     render() {

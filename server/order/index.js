@@ -6,6 +6,7 @@ async function getOrder(db) {
 exports.getOrder = getOrder;
 
 async function addToOrder(db, itemId, quantity) {
+  quantity = parseInt(quantity);
   // if found item already in the order, increase the quantity
   // otherwise, create a new order item
 
@@ -13,7 +14,9 @@ async function addToOrder(db, itemId, quantity) {
   let existingOrderItem = await collection.findOne({ itemId });
 
   if (existingOrderItem) {
-    existingOrderItem.quantity += quantity;
+    // console.log(existingOrderItem);
+    let updatedQuantity = parseInt(existingOrderItem.quantity) + quantity;
+    existingOrderItem.quantity = updatedQuantity;
     await collection.replaceOne({ itemId }, existingOrderItem);
   } else {
     let newOrderItem = {
@@ -29,6 +32,8 @@ exports.addToOrder = addToOrder;
 // if the orderItem exist already, change its quantity
 // if the orderItem does not exist, create the orderItem with that quantity
 async function changeOrderItem(db, itemId, quantity) {
+  quantity = parseInt(quantity);
+
   const collection = db.collection("order");
   let existingOrderItem = await collection.findOne({ itemId });
 

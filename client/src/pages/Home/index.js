@@ -20,7 +20,7 @@ class Home extends React.Component {
         <div style={styles.content}>
           <div style={styles.info}>
             <Restaurant style={styles.restaurant} />
-            <MenuList style={styles.menu}/>
+            <MenuList style={styles.menu} order={this.props.order}/>
           </div>
           <div style={styles.order}>
             <Order
