@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { DropdownButton, Dropdown, Container, Col, Row } from "react-bootstrap";
 import GenerateDropdownItem from "../../../components/GenerateDropdownItem";
-// import { getMenu } from "../../../utils";
 
 import styles from "./OrderSummary.css.js";
 import CheckoutButton from "../../../components/Button/CheckoutButton";
@@ -54,8 +53,7 @@ class OrderSummary extends Component {
                   <DropdownButton
                     id="dropdown-basic-button"
                     title={element.quantity}
-                    size="sm"
-                  >
+                    size="sm">
                     <Dropdown.Item onSelect={() => {
                       this.props.onOrderItemDelete(element.itemId);
                     }}>
@@ -64,8 +62,7 @@ class OrderSummary extends Component {
                     <Dropdown.Divider />
                     <GenerateDropdownItem
                       id={element.itemId}
-                      onSelect={this.handleSelectQuantityChange}
-                    />
+                      onSelect={this.handleSelectQuantityChange}/>
                   </DropdownButton>
                 </Col>
                 <Col sm={8}>{element.name}</Col>

@@ -12,7 +12,6 @@ export default {
         gridRow: '2/3',
         display: 'grid',
         gridTemplateColumns: '60% 40%',
-        // border: '1px solid lightgrey',
     },
     info: {
         gridColumn: '1/2',
@@ -31,5 +30,6 @@ export default {
         display: 'grid',
         gridTemplateRows: '10% 80% 10%',
         borderLeft: '1px solid lightgrey', 
+        overflowY: 'scroll',
     }
 }

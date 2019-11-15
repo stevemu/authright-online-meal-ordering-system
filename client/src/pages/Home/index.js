@@ -44,7 +44,4 @@ const mapDispatchToProps = dispatch => ({
   updateMenu: menu => dispatch(updateMenu(menu))
 });
 
-// test
-//123123
-
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

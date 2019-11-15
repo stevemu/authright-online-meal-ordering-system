@@ -1,9 +1,7 @@
 export default {
     container: {
-        // borderRight: '1px solid lightgrey',
         borderBottom: '1px solid lightgrey',
         height: 'auto',
-        // marginTop: '55px',
     },
     JumbotronStyle: {
         backgroundColor: 'white',

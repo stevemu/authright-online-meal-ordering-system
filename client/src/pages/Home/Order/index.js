@@ -17,7 +17,6 @@ export default class Order extends React.Component {
     this.timerID = setInterval(() => this.tick(), 500);
   }
 
-  // update order item quantity
   async handleQuantity(quantity, itemId) {
     let newOrder = {
       ...this.props.order,

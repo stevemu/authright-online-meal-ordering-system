@@ -1,21 +1,22 @@
 export default {
     container: {
-        padding: '0rem 2rem', 
-        // borderRight: '1px solid lightgrey', 
-    },
-    header: {
+        padding: '0rem 2rem',
         display: 'grid',
-        gridTemplateRows: '1fr 1fr',
+        gridTemplateRows: '10% 90%',
     },
-    title: {
+    nav: {
+        backgroundColor: 'transparent',
         gridRow: '1/2',
-        fontSize: '20px',
-        marginTop: '1rem',
-        marginBottom: '1rem',
     },
-    tag: {
+    body: {
+        paddingTop: '5px',
         gridRow: '2/3',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
+        overflowY: 'scroll'
+    },
+    dropdown: {
+        position: 'relative',
+        // left: '100%',
+        // marginTop: '-6px',
+        // marginLeft: '-1px',
     }
 }
