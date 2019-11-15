@@ -28,6 +28,14 @@ function configRoutes(app) {
     return res.json({ success: true });
   });
 
+  app.post("/api/order/add", async (req, res) => {
+    let db = req.db;
+
+    let { itemId, quantity } = req.body;
+    await addToOrder(db, itemId, quantity);
+    return res.json({ success: true });
+  });
+
   app.delete("/api/order", async (req, res) => {
     let db = req.db;
 
