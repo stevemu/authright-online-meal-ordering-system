@@ -14,7 +14,7 @@ let port = 8070;
 
 // configure mongo db
 const MONGO_URI =
-  "mongodb://stevemu.com:27017/authright-meal";
+  "mongodb://meal:meal@stevemu.com:27017/authright-meal";
 const client = new MongoClient(MONGO_URI, { useUnifiedTopology: true });
 
 client.connect((err) => {
