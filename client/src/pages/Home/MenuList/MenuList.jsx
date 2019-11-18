@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Table, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
-import { getMenu, updateOrderItem, addOrderItem } from "../../../utils";
+import { getMenu, addOrderItem } from "../../../utils";
 import { connect } from "react-redux";
 import { updateMenu } from "../../../Redux/actions/menuAction";
 
 import styles from "./MenuList.css.js";
+import List from '../../../components/List/List';
 import ItemModal from "../../../components/ItemModal/ItemModal";
 
 class MenuList extends Component {
@@ -19,23 +20,19 @@ class MenuList extends Component {
             unitprice: 8.95,
             modalShow: false,
             command: "Add",
-            menu: []
+            menu: [],
         };
+
+        this.setModalShow = this.setModalShow.bind(this);
+        this.fetchDetails = this.fetchDetails.bind(this);
     }
 
     setModalShow(value) {
-        this.setState(state => ({
-            ...state,
+        this.setState({
             modalShow: value,
             quantity: 1
-        }));
-    };
-
-    setQuantity(value) {
-        this.setState({
-            quantity: this.state.quantity + value
         });
-    }
+    };
 
     addHandler = () => {
         this.setState({
@@ -63,14 +60,12 @@ class MenuList extends Component {
 
     async updateOrder(value) {
         // use fetch to call api to push data to database.
-        // console.log('update order')
         this.setState(state => ({
             ...state,
             modalShow: value,
             quantity: 1
         }));
 
-        // send change of order item to backend
         let itemId = this.state.currentItemId;
         let quantity = this.state.quantity;
 
@@ -82,13 +77,9 @@ class MenuList extends Component {
         getMenu().then(result => this.props.updateMenu(result));
     }
 
-
     render() {
-        const { data } = this.props;
+        const { data, filtered } = this.props;
         const { currentData, currentPrice } = this.state;
-
-        // console.log(Object.keys(data))
-        // console.log(Object.keys(data).slice(138, 158))
 
         return (
             <div style={styles.container}>
@@ -109,7 +100,7 @@ class MenuList extends Component {
                     </Navbar.Collapse>
                 </Navbar>
                 {/* lunch special */}
-                <body style={styles.body}>
+                <div style={styles.body}>
                     <Table style={styles.table} responsive>
                         <thead id="lunch-special">
                             <tr>
@@ -118,24 +109,7 @@ class MenuList extends Component {
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {Object.keys(data).slice(0, 58).map((key, index) => (
-                                <tr
-                                    key={key}
-                                    data-price={data[key].price}
-                                    data-item={data[key].name}
-                                    data-id={data[key].itemId}
-                                    onClick={event => {
-                                        this.setModalShow(true);
-                                        this.fetchDetails(event);
-                                    }}
-                                >
-                                    <td>{data[key].itemId}</td>
-                                    <td>{data[key].name}</td>
-                                    <td>{data[key].price}</td>
-                                </tr>
-                            ))}
-                        </tbody>
+                        <List data={filtered} start={0} end={58} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
                         {/* appetizers */}
                         <thead id="appetizers">
                             <tr>
@@ -144,24 +118,7 @@ class MenuList extends Component {
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {Object.keys(data).slice(56, 86).map((key, index) => (
-                                <tr
-                                    key={key}
-                                    data-price={data[key].price}
-                                    data-item={data[key].name}
-                                    data-id={data[key].itemId}
-                                    onClick={event => {
-                                        this.setModalShow(true);
-                                        this.fetchDetails(event);
-                                    }}
-                                >
-                                    <td>{data[key].itemId}</td>
-                                    <td>{data[key].name}</td>
-                                    <td>{data[key].price}</td>
-                                </tr>
-                            ))}
-                        </tbody>
+                        <List data={filtered} start={56} end={86} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
                         {/* Chef's Specialties */}
                         <thead id="chef">
                             <tr>
@@ -170,24 +127,7 @@ class MenuList extends Component {
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {Object.keys(data).slice(83, 102).map((key, index) => (
-                                <tr
-                                    key={key}
-                                    data-price={data[key].price}
-                                    data-item={data[key].name}
-                                    data-id={data[key].itemId}
-                                    onClick={event => {
-                                        this.setModalShow(true);
-                                        this.fetchDetails(event);
-                                    }}
-                                >
-                                    <td>{data[key].itemId}</td>
-                                    <td>{data[key].name}</td>
-                                    <td>{data[key].price}</td>
-                                </tr>
-                            ))}
-                        </tbody>
+                        <List data={filtered} start={83} end={102} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
                         {/* Beef / Lamb */}
                         <thead id="beef">
                             <tr>
@@ -196,24 +136,7 @@ class MenuList extends Component {
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {Object.keys(data).slice(101, 117).map((key, index) => (
-                                <tr
-                                    key={key}
-                                    data-price={data[key].price}
-                                    data-item={data[key].name}
-                                    data-id={data[key].itemId}
-                                    onClick={event => {
-                                        this.setModalShow(true);
-                                        this.fetchDetails(event);
-                                    }}
-                                >
-                                    <td>{data[key].itemId}</td>
-                                    <td>{data[key].name}</td>
-                                    <td>{data[key].price}</td>
-                                </tr>
-                            ))}
-                        </tbody>
+                        <List data={filtered} start={101} end={117} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
                         {/* Pork */}
                         <thead id="chicken">
                             <tr>
@@ -222,24 +145,7 @@ class MenuList extends Component {
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {Object.keys(data).slice(138, 158).map((key, index) => (
-                                <tr
-                                    key={key}
-                                    data-price={data[key].price}
-                                    data-item={data[key].name}
-                                    data-id={data[key].itemId}
-                                    onClick={event => {
-                                        this.setModalShow(true);
-                                        this.fetchDetails(event);
-                                    }}
-                                >
-                                    <td>{data[key].itemId}</td>
-                                    <td>{data[key].name}</td>
-                                    <td>{data[key].price}</td>
-                                </tr>
-                            ))}
-                        </tbody>
+                        <List data={filtered} start={138} end={158} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
                         {/* Chicken */}
                         <thead id="pork">
                             <tr>
@@ -248,24 +154,7 @@ class MenuList extends Component {
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {Object.keys(data).slice(117, 138).map((key, index) => (
-                                <tr
-                                    key={key}
-                                    data-price={data[key].price}
-                                    data-item={data[key].name}
-                                    data-id={data[key].itemId}
-                                    onClick={event => {
-                                        this.setModalShow(true);
-                                        this.fetchDetails(event);
-                                    }}
-                                >
-                                    <td>{data[key].itemId}</td>
-                                    <td>{data[key].name}</td>
-                                    <td>{data[key].price}</td>
-                                </tr>
-                            ))}
-                        </tbody>
+                        <List data={filtered} start={117} end={138} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
                     </Table>
                     <ItemModal
                         data={data}
@@ -279,7 +168,7 @@ class MenuList extends Component {
                         command={this.state.command}
                         onHide={() => this.setModalShow(false)}
                         updateorder={() => this.updateOrder(false)} />
-                </body>
+                </div>
             </div>
         )
     }

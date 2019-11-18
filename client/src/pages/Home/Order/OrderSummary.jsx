@@ -35,6 +35,14 @@ class OrderSummary extends Component {
     return total.toFixed(2);
   }
 
+  getQuantity(items) {
+    let quantity = 0;
+    items.forEach(element => {
+      quantity += element.quantity;
+    });
+    return quantity;
+  }
+
   onSelectDelete = () => {
 
   }
@@ -62,7 +70,7 @@ class OrderSummary extends Component {
                     <Dropdown.Divider />
                     <GenerateDropdownItem
                       id={element.itemId}
-                      onSelect={this.handleSelectQuantityChange}/>
+                      onSelect={this.handleSelectQuantityChange} />
                   </DropdownButton>
                 </Col>
                 <Col sm={8}>{element.name}</Col>
@@ -88,6 +96,11 @@ class OrderSummary extends Component {
           <div>
             {"$"}
             {this.getSubtotal(orderItems)}
+          </div>
+          <div>Quantity</div>
+          <div>
+            
+            {this.getQuantity(orderItems)}
           </div>
         </div>
         <div style={styles.items}>{items}</div>
