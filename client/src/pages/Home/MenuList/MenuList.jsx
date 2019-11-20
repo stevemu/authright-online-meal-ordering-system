@@ -1,167 +1,185 @@
 import React, { Component } from "react";
-import { Table, Nav } from "react-bootstrap";
+import { Table, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
-import { getMenu, updateOrderItem, addOrderItem } from "../../../utils";
+import { getMenu, addOrderItem } from "../../../utils";
 import { connect } from "react-redux";
 import { updateMenu } from "../../../Redux/actions/menuAction";
 
 import styles from "./MenuList.css.js";
+import List from '../../../components/List/List';
 import ItemModal from "../../../components/ItemModal/ItemModal";
 
 class MenuList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentData: null,
-      currentPrice: "$0.00",
-      currentItemId: null,
-      quantity: 1,
-      unitprice: 8.95,
-      modalShow: false,
-      command: "Add",
-      menu: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentData: null,
+            currentPrice: "$0.00",
+            currentItemId: null,
+            quantity: 1,
+            unitprice: 8.95,
+            modalShow: false,
+            command: "Add",
+            menu: [],
+        };
+
+        this.setModalShow = this.setModalShow.bind(this);
+        this.fetchDetails = this.fetchDetails.bind(this);
+    }
+
+    setModalShow(value) {
+        this.setState({
+            modalShow: value,
+            quantity: 1
+        });
     };
-  }
 
-  setModalShow(value) {
-    this.setState(state => ({
-      ...state,
-      modalShow: value,
-      quantity: 1
-    }));
-  }
+    addHandler = () => {
+        this.setState({
+            quantity: this.state.quantity + 1
+        });
+    };
 
-  setQuantity(value) {
-    this.setState({
-      quantity: this.state.quantity + value
-    });
-  }
+    minusHandler = () => {
+        this.setState({
+            quantity: this.state.quantity - 1
+        });
+    };
 
-  addHandler = () => {
-    this.setState({
-      quantity: this.state.quantity + 1
-    });
-  };
+    fetchDetails = event => {
+        const targetName = event.currentTarget.getAttribute("data-item");
+        const targetPrice = event.currentTarget.getAttribute("data-price");
+        const targetId = event.currentTarget.getAttribute("data-id");
 
-  minusHandler = () => {
-    this.setState({
-      quantity: this.state.quantity - 1
-    });
-  };
+        this.setState({
+            currentData: targetName,
+            currentPrice: targetPrice,
+            currentItemId: targetId,
+        });
+    };
 
-  fetchDetails = event => {
-    const targetName = event.currentTarget.getAttribute("data-item");
-    const targetPrice = event.currentTarget.getAttribute("data-price");
-    const targetId = event.currentTarget.getAttribute("data-id");
+    async updateOrder(value) {
+        // use fetch to call api to push data to database.
+        this.setState(state => ({
+            ...state,
+            modalShow: value,
+            quantity: 1
+        }));
 
-    // get the quantity from order with itemId, default is 1
-    // let quantity = 1;
-    // if (this.props.order[targetId]) {
-    //     quantity = this.props.order[targetId];
-    // }
+        let itemId = this.state.currentItemId;
+        let quantity = this.state.quantity;
 
-    this.setState({
-      currentData: targetName,
-      currentPrice: targetPrice,
-      currentItemId: targetId,
-    //   quantity
-    });
-  };
+        await addOrderItem(itemId, quantity);
+    }
 
-  async updateOrder(value) {
-    // use fetch to call api to push data to database.
-    // console.log('update order')
-    this.setState(state => ({
-      ...state,
-      modalShow: value,
-      quantity: 1
-    }));
+    componentDidMount() {
+        // fetch the project name, once it retrieves resolve the promsie and update the state.
+        getMenu().then(result => this.props.updateMenu(result));
+    }
 
-    // send change of order item to backend
-    let itemId = this.state.currentItemId;
-    let quantity = this.state.quantity;
+    render() {
+        const { data, filtered } = this.props;
+        const { currentData, currentPrice } = this.state;
 
-    await addOrderItem(itemId, quantity);
-  }
-
-  componentDidMount() {
-    // fetch the project name, once it retrieves resolve the promsie and update the state.
-    getMenu().then(result => this.props.updateMenu(result));
-  }
-
-  render() {
-    const { data } = this.props;
-    const { currentData, currentPrice } = this.state;
-
-    return (
-      <div style={styles.container}>
-        <Nav
-          variant="tabs"
-          defaultActiveKey="/"
-          fixed="top"
-          style={styles.header}
-        >
-          <Nav.Item style={styles.title}>Menu</Nav.Item>
-          <div style={styles.tag}>
-            <Nav.Item>
-              <Nav.Link href="/">Lunch Special</Nav.Link>
-            </Nav.Item>
-            {/* <Nav.Item>
-                            <Nav.Link eventKey="link-1">Chef's Specialties</Nav.Link>
-                        </Nav.Item> */}
-          </div>
-        </Nav>
-        <Table style={styles.table} responsive>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Lunch Special</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.keys(data).map((key, index) => (
-              <tr
-                key={key}
-                data-price={data[key].price}
-                data-item={data[key].name}
-                data-id={data[key].itemId}
-                onClick={event => {
-                  this.setModalShow(true);
-                  this.fetchDetails(event);
-                }}
-              >
-                <td>{data[key].itemId}</td>
-                <td>{data[key].name}</td>
-                <td>{data[key].price}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-        <ItemModal
-          data={data}
-          name={currentData}
-          price={currentPrice}
-          show={this.state.modalShow}
-          quantity={this.state.quantity}
-          addhandler={this.addHandler}
-          minushandler={this.minusHandler}
-          unitprice={this.state.unitprice}
-          command={this.state.command}
-          onHide={() => this.setModalShow(false)}
-          updateorder={() => this.updateOrder(false)}
-        />
-      </div>
-    );
-  }
+        return (
+            <div style={styles.container}>
+                <Navbar collapseOnSelect sticky="top" fixed="top" style={styles.nav}>
+                    <Navbar.Brand href="#home">Menu</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link href="#lunch-special">Lunch Special</Nav.Link>
+                            <Nav.Link href="#appetizers">Appetizers</Nav.Link>
+                            <Nav.Link href="#chef">Chef's Specialties</Nav.Link>
+                            <NavDropdown title="More" id="collasible-nav-dropdown" style={styles.dropdown}>
+                                <NavDropdown.Item href="#beef">Beef / Lamb</NavDropdown.Item>
+                                <NavDropdown.Item href="#chicken">Chicken / Duck</NavDropdown.Item>
+                                <NavDropdown.Item href="#pork">Pork</NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+                {/* lunch special */}
+                <div style={styles.body}>
+                    <Table style={styles.table} responsive>
+                        <thead id="lunch-special">
+                            <tr>
+                                <th>ID</th>
+                                <th>Lunch Special</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <List data={filtered} start={0} end={58} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
+                        {/* appetizers */}
+                        <thead id="appetizers">
+                            <tr>
+                                <th>ID</th>
+                                <th>Appetizers</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <List data={filtered} start={56} end={86} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
+                        {/* Chef's Specialties */}
+                        <thead id="chef">
+                            <tr>
+                                <th>ID</th>
+                                <th>Chef's Specialties</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <List data={filtered} start={83} end={102} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
+                        {/* Beef / Lamb */}
+                        <thead id="beef">
+                            <tr>
+                                <th>ID</th>
+                                <th>Beef / Lamb</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <List data={filtered} start={101} end={117} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
+                        {/* Pork */}
+                        <thead id="chicken">
+                            <tr>
+                                <th>ID</th>
+                                <th>Chicken / Duck</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <List data={filtered} start={138} end={158} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
+                        {/* Chicken */}
+                        <thead id="pork">
+                            <tr>
+                                <th>ID</th>
+                                <th>Pork</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <List data={filtered} start={117} end={138} setModalShow={this.setModalShow} fetchDetails={this.fetchDetails} />
+                    </Table>
+                    <ItemModal
+                        data={data}
+                        name={currentData}
+                        price={currentPrice}
+                        show={this.state.modalShow}
+                        quantity={this.state.quantity}
+                        addhandler={this.addHandler}
+                        minushandler={this.minusHandler}
+                        unitprice={this.state.unitprice}
+                        command={this.state.command}
+                        onHide={() => this.setModalShow(false)}
+                        updateorder={() => this.updateOrder(false)} />
+                </div>
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = state => ({
-  data: state.menu
+    data: state.menu
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateMenu: menu => dispatch(updateMenu(menu))
+    updateMenu: menu => dispatch(updateMenu(menu))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuList);

@@ -11,16 +11,62 @@ import Navigation from "../../components/Navbar/Navigation";
 import Restaurant from "../../components/Restaurant/Restaurant";
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filtered: [],
+    };
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({
+      filtered: this.props.menu
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      filtered: nextProps.menu
+    });
+  }
+
+  handleChange = (e) => {
+    e.preventDefault();
+    let currentList = [];
+    let newList = [];
+
+    if (e.target.value !== "") {
+      currentList = this.props.menu;
+
+      console.log(currentList)
+      
+      newList = Object.values(currentList).filter((item) => {
+        const lc = item.name.toLowerCase()
+        const filter = e.target.value.toLowerCase()
+
+        return lc.includes(filter);
+      })
+      // console.log("new list is", newList)
+    } else {
+      newList = this.props.menu;
+    }
+
+    this.setState({
+      filtered: newList
+    });
+  }
+
   render() {
     return (
       <div style={styles.container}>
         <div style={styles.nav}>
-          <Navigation />
+          <Navigation handleChange={this.handleChange} />
         </div>
         <div style={styles.content}>
           <div style={styles.info}>
             <Restaurant style={styles.restaurant} />
-            <MenuList style={styles.menu} order={this.props.order}/>
+            <MenuList style={styles.menu} order={this.props.order} filtered={this.state.filtered} />
           </div>
           <div style={styles.order}>
             <Order
