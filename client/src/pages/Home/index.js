@@ -25,10 +25,12 @@ class Home extends React.Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      filtered: nextProps.menu
-    });
+  componentDidUpdate(prevProps) {
+    if(prevProps.menu !== this.props.menu) {
+      this.setState({
+        filtered: this.props.menu
+      });
+    }
   }
 
   handleChange = (e) => {
@@ -38,16 +40,14 @@ class Home extends React.Component {
 
     if (e.target.value !== "") {
       currentList = this.props.menu;
-
-      console.log(currentList)
-      
+      // console.log("Current list is", currentList)
       newList = Object.values(currentList).filter((item) => {
         const lc = item.name.toLowerCase()
         const filter = e.target.value.toLowerCase()
 
         return lc.includes(filter);
       })
-      // console.log("new list is", newList)
+      // console.log("New list is", newList)
     } else {
       newList = this.props.menu;
     }
@@ -82,7 +82,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   order: state.order,
-  menu: state.menu
+  menu: state.menu,
 });
 
 const mapDispatchToProps = dispatch => ({
