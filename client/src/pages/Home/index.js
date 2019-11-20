@@ -40,14 +40,14 @@ class Home extends React.Component {
 
     if (e.target.value !== "") {
       currentList = this.props.menu;
-      console.log("Current list is", currentList)
+      // console.log("Current list is", currentList)
       newList = Object.values(currentList).filter((item) => {
         const lc = item.name.toLowerCase()
         const filter = e.target.value.toLowerCase()
 
         return lc.includes(filter);
       })
-      console.log("New list is", newList)
+      // console.log("New list is", newList)
     } else {
       newList = this.props.menu;
     }
