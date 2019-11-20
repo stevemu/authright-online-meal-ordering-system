@@ -80,7 +80,6 @@ class MenuList extends Component {
     render() {
         const { data, filtered } = this.props;
         const { currentData, currentPrice } = this.state;
-
         return (
             <div style={styles.container}>
                 <Navbar collapseOnSelect sticky="top" fixed="top" style={styles.nav}>
